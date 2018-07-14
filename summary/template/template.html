@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <title>Lighthouse Summary Report</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    table {
+      margin: auto;
+    }
+    tr {
+      border: 1px solid grey;
+    }
+    h1 {
+       text-align: center;
+       margin: 30px auto 50px auto
+    }
+  </style>
+</head>
+<body>
+<table>
+  <h1>Performance Summary Report</h1>
+  <tr>
+    <th>
+      Case No.
+    </th>
+    <th>
+      First Meaningful Paint
+    </th>
+    <th>
+      Link To Details
+    </th>
+  </tr>
+  <tbody id="tableBody">
+  </tbody>
+</table>
+<script>
+let timespent = %%TIME_SPENT%%;
+let timestamp = %%TIMESTAMP%%;
+let tableBody = document.getElementById("tableBody");
+let content = '';
+for(let i=0; i < timespent.length; i++) {
+  content += `<tr style="border: 1px solid grey">
+    <td>
+      ${i+1}
+    </td>
+    <td>
+      ${timespent[i]}
+    </td>
+    <td>
+      <a href="../../cases/lighthouse-report@${timestamp}-${i}.html">View Details</a>
+    </td>
+  </tr>`
+}
+let total = timespent.reduce((i, j) => {
+  return i + j;
+})
+let count = timespent.filter(function(i) { return i}).length
+content += `<tr>
+<td>
+  AVG
+</td>
+<td>
+${total / count}
+</td>
+</tr>`
+tableBody.innerHTML = content;
+</script>
+</body>
+</html>
